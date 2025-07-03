@@ -8,7 +8,7 @@ Welcome to the repository of a **high-performance, scalable, and visually engagi
 
 ---
 
-<img src="https://drive.google.com/file/d/1Yz7UKCJgpsP4WUgKtIE8GCuhxDMtfqOl/view?usp=drive_link"/> 
+<img src="public/Recording 2025-07-03 225235.gif" width="100%"/> 
 
 ## 🌐 Live Preview
 🔗 [Check it out here!](https://ogotechnology.net)
