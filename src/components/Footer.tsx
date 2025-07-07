@@ -158,7 +158,7 @@ const Footer: React.FC = () => {
                 </span>
               </motion.div>
               <p className="text-gray-400 mb-6 leading-relaxed">
-                Global Technology Service Provider offering academic assistance and real-time IT solutions from Hikkaduwa, Sri Lanka.
+              We provide AI-driven software, web & app development, and academic support to help businesses and students worldwide succeed.
               </p>
               
               <div className="flex space-x-3 mb-8">
@@ -280,7 +280,7 @@ const Footer: React.FC = () => {
                 <div>
                   <p className="text-sm text-gray-400">Email</p>
                   <a href="mailto:ogotechnology.lk@gmail.com" className="text-white hover:text-blue-300">
-                    ogotechnology.lk@gmail.com
+                    info@ogotechnology.net
                   </a>
                 </div>
               </motion.li>
@@ -330,7 +330,7 @@ const Footer: React.FC = () => {
             <div className="lg:col-span-3">
               <h3 className="text-xl font-semibold mb-1">Stay Connected</h3>
               <p className="text-gray-300 mb-4 lg:mb-0">
-                Subscribe to our newsletter for updates and exclusive offers from Hikkaduwa, Sri Lanka
+                Subscribe to our newsletter for updates and exclusive offers from ogo technology, Sri Lanka
               </p>
             </div>
             <div className="lg:col-span-2">

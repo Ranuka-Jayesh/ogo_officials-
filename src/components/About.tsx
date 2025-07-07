@@ -22,13 +22,32 @@ const About: React.FC = () => {
     {
       icon: <Target className="w-6 h-6" />,
       title: "Our Mission",
-      description: "Delivering excellence through our specialized departments: Academic Solutions, Software Innovation, and Creative Design.",
+      description: "To deliver smart, affordable tech from AI automation project support built for global growth.",
     },
     {
       icon: <Sparkles className="w-6 h-6" />,
       title: "Our Vision",
-      description: "To be the leading technology company providing integrated solutions in academics, software development, and creative design.",
+      description: "To lead the world in AI-powered digital solutions that help startups, businesses, and students thrive.",
     },
+  ];
+
+  // Flag list for carousel (for seamless repeat)
+  const flags = [
+    { name: 'Sri Lanka', url: 'https://flagcdn.com/w80/lk.png' },
+    { name: 'India', url: 'https://flagcdn.com/w80/in.png' },
+    { name: 'United Kingdom', url: 'https://flagcdn.com/w80/gb.png' },
+    { name: 'United States', url: 'https://flagcdn.com/w80/us.png' },
+    { name: 'Canada', url: 'https://flagcdn.com/w80/ca.png' },
+    { name: 'Australia', url: 'https://flagcdn.com/w80/au.png' },
+    { name: 'Germany', url: 'https://flagcdn.com/w80/de.png' },
+    { name: 'France', url: 'https://flagcdn.com/w80/fr.png' },
+    { name: 'UAE', url: 'https://flagcdn.com/w80/ae.png' },
+    { name: 'Singapore', url: 'https://flagcdn.com/w80/sg.png' },
+    { name: 'Malaysia', url: 'https://flagcdn.com/w80/my.png' },
+    { name: 'Japan', url: 'https://flagcdn.com/w80/jp.png' },
+    { name: 'South Africa', url: 'https://flagcdn.com/w80/za.png' },
+    { name: 'Italy', url: 'https://flagcdn.com/w80/it.png' },
+    { name: 'Netherlands', url: 'https://flagcdn.com/w80/nl.png' },
   ];
 
   return (
@@ -37,33 +56,55 @@ const About: React.FC = () => {
       ref={sectionRef}
       className="relative min-h-screen py-20 overflow-hidden bg-gradient-to-b from-gray-50 to-white scroll-mt-20"
     >
+      {/* Top fade overlay for smooth transition from previous section */}
+      <div className="pointer-events-none absolute top-0 left-0 w-full h-16 z-20" style={{background: 'linear-gradient(to bottom, rgba(245,245,255,1), rgba(245,245,255,0))'}} />
       {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        {/* Grid Pattern */}
-        <div className="absolute inset-0" style={{ 
-          backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(0,0,0,0.05) 1px, transparent 0)',
-          backgroundSize: '40px 40px' 
-        }} />
-        
-        {/* Floating Particles */}
-        {[...Array(20)].map((_, i) => (
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Animated grid pattern */}
+        <motion.div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(59,130,246,0.07) 1px, transparent 0)',
+            backgroundSize: '32px 32px',
+            zIndex: 0
+          }}
+          animate={{ backgroundPosition: ["0px 0px", "32px 32px", "0px 0px"] }}
+          transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
+        />
+        {/* Animated gradient blobs */}
+        <motion.div
+          className="absolute w-[600px] h-[600px] rounded-full bg-gradient-to-tr from-blue-300 via-purple-300 to-pink-300 opacity-20 blur-3xl"
+          style={{ top: '-180px', left: '-120px', zIndex: 1 }}
+          animate={{ x: [0, 60, -40, 0], y: [0, 40, -30, 0], scale: [1, 1.08, 0.97, 1] }}
+          transition={{ duration: 22, repeat: Infinity, repeatType: "mirror" }}
+        />
+        <motion.div
+          className="absolute w-[400px] h-[400px] rounded-full bg-gradient-to-br from-pink-400 via-blue-300 to-purple-200 opacity-20 blur-2xl"
+          style={{ bottom: '-120px', right: '-100px', zIndex: 1 }}
+          animate={{ x: [0, -40, 30, 0], y: [0, -30, 40, 0], scale: [1, 0.95, 1.05, 1] }}
+          transition={{ duration: 26, repeat: Infinity, repeatType: "mirror", delay: 2 }}
+        />
+        {/* Floating Particles (enhanced) */}
+        {[...Array(24)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-2 h-2 rounded-full bg-blue-500/10"
+            className="absolute w-2 h-2 rounded-full bg-gradient-to-tr from-blue-400 to-purple-400 opacity-40"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
+              zIndex: 2
             }}
             animate={{
-              y: [0, Math.random() * 100 - 50],
-              x: [0, Math.random() * 100 - 50],
-              scale: [1, Math.random() + 0.5],
-              opacity: [0.3, 0.6],
+              y: [0, Math.random() * 80 - 40, 0],
+              x: [0, Math.random() * 80 - 40, 0],
+              opacity: [0.4, 0.7, 0.4],
+              scale: [1, 1.3, 1]
             }}
             transition={{
-              duration: Math.random() * 5 + 3,
+              duration: 7 + Math.random() * 4,
               repeat: Infinity,
               repeatType: "reverse",
+              delay: i * 0.15
             }}
           />
         ))}
@@ -73,39 +114,69 @@ const About: React.FC = () => {
         className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
         style={{ scale, opacity }}
       >
-        {/* Header Section */}
-        <div className="text-center mb-20">
+        {/* Big animated title at the very top */}
+        <motion.h1
+          className="text-4xl md:text-6xl font-extrabold text-gray-900 text-center mt-2 mb-12"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+        >
+          Innovating Solutions
+          <br />
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
+            Across Technologies
+          </span>
+        </motion.h1>
+        <div className="relative flex flex-col items-center justify-center mb-20 py-8">
+          {/* Animated gradient blob background */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="relative inline-block"
-          >
-            <span className="text-blue-600 text-sm font-semibold tracking-wider uppercase">
-            About ogo technology
-            </span>
+            className="absolute -z-10 w-[420px] h-[420px] rounded-full bg-gradient-to-tr from-blue-400 via-purple-400 to-pink-400 opacity-30 blur-3xl animate-pulse"
+            initial={{ scale: 0.8, opacity: 0.2 }}
+            animate={{ scale: [0.8, 1.05, 0.95, 1], opacity: [0.2, 0.35, 0.3, 0.3] }}
+            transition={{ duration: 8, repeat: Infinity, repeatType: "reverse" }}
+            style={{ top: '-80px', left: '50%', transform: 'translateX(-50%)' }}
+          />
+          {/* Floating sparkles */}
+          {[...Array(12)].map((_, i) => (
             <motion.div
-              className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-600"
-              initial={{ width: 0 }}
-              whileInView={{ width: '100%' }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
+              key={i}
+              className="absolute w-2 h-2 rounded-full bg-gradient-to-tr from-blue-400 to-purple-400 opacity-60"
+              style={{
+                left: `${30 + Math.sin(i) * 120}px`,
+                top: `${60 + Math.cos(i) * 120}px`,
+              }}
+              animate={{
+                y: [0, Math.random() * 20 - 10, 0],
+                x: [0, Math.random() * 20 - 10, 0],
+                opacity: [0.6, 1, 0.6],
+              }}
+              transition={{
+                duration: 3 + Math.random() * 2,
+                repeat: Infinity,
+                repeatType: "reverse",
+                delay: i * 0.2
+              }}
             />
-          </motion.div>
-          
-          <motion.h1
-            className="mt-4 text-4xl md:text-6xl font-bold text-gray-900"
-            initial={{ opacity: 0, y: 20 }}
+          ))}
+          <motion.h2
+            className="text-2xl md:text-3xl font-bold text-blue-700 tracking-wide mb-4"
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
+            transition={{ duration: 0.7 }}
           >
-            Innovating Solutions
-            <br />
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
-              Across Technologies
-            </span>
-          </motion.h1>
+            About OGO Technology
+          </motion.h2>
+          <motion.p
+            className="max-w-2xl text-center md:text-justify text-lg md:text-xl text-gray-700 font-medium leading-relaxed"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.9, delay: 0.2 }}
+          >
+            OGO Technology is a global software and AI services company, trusted by startups, entrepreneurs, and university students worldwide. We specialize in AI-powered automation, full-stack web and mobile app development, and final-year academic project support. Our goal is to deliver scalable, cost-effective, and intelligent solutions to help our clients thrive in the digital world.
+          </motion.p>
         </div>
         
         {/* Stats Section */}
@@ -417,7 +488,45 @@ const About: React.FC = () => {
             ))}
       </div>
         </motion.div>
+        {/* Flag Carousel: Serving Clients in 15+ Countries */}
+        <div className="mt-16 flex flex-col items-center w-full">
+          <motion.h3
+            className="text-xl md:text-2xl font-semibold text-black mb-20 relative inline-block"
+            initial={{ y: -20, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, type: 'spring' }}
+          >
+            <span className="relative inline-block">
+              Proudly Serving 15+ Countries Worldwide
+              <motion.div
+                className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-blue-500 to-purple-500"
+                initial={{ width: 0 }}
+                whileInView={{ width: '100%' }}
+                transition={{ delay: 0.2, duration: 0.8 }}
+              />
+            </span>
+          </motion.h3>
+          <div className="relative w-screen overflow-hidden px-2 md:px-8">
+            <div className="flex items-center gap-8 animate-slide-x whitespace-nowrap" style={{animation: 'slide-x 30s linear infinite'}}>
+              {flags.concat(flags).map((flag, i) => (
+                <motion.div
+                  key={flag.name + i}
+                  className="inline-flex flex-col items-center"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: (i % flags.length) * 0.1 }}
+                >
+                  <img src={flag.url} alt={flag.name + ' flag'} className="w-16 h-10 object-cover rounded shadow-md mb-2" style={{minWidth: '64px', minHeight: '40px', maxWidth: '64px', maxHeight: '40px', objectFit: 'cover', display: 'block'}} />
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
       </motion.div>
+      {/* Bottom fade overlay for smooth transition to next section */}
+      <div className="pointer-events-none absolute bottom-0 left-0 w-full h-16 z-20" style={{background: 'linear-gradient(to top, rgba(255,255,255,1), rgba(255,255,255,0))'}} />
     </section>
   );
 };

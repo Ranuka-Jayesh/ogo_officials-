@@ -106,7 +106,7 @@ const Hero: React.FC = () => {
     })
   };
   
-  const sentence = "Turning Ideas into Impactful Realities";
+  const sentence = "Where Innovation Meets Automation.";
   const words = sentence.split(" ");
 
   // Star field animation
@@ -449,7 +449,7 @@ const Hero: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1.2 }}
             >
-              From academic solutions to cutting-edge tech – we bring your vision to life.
+              Turn your ideas into reality with powerful AI automations, custom websites, mobile apps, and academic project support trusted by clients worldwide.
             </motion.p>
             
             <motion.div 

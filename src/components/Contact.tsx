@@ -151,7 +151,7 @@ const Contact: React.FC = () => {
                       whileHover={{ x: 3 }}
                     >
                       <Globe className="w-4 h-4 text-blue-600 mr-3" />
-                      <span className="text-sm text-gray-600">www.ogotechnology.com</span>
+                      <span className="text-sm text-gray-600">www.ogotechnology.net</span>
                     </motion.div>
                     
                     <motion.div 
@@ -159,7 +159,7 @@ const Contact: React.FC = () => {
                       whileHover={{ x: 3 }}
                     >
                       <Mail className="w-4 h-4 text-blue-600 mr-3" />
-                      <span className="text-sm text-gray-600">ogotechnology.lk@gmail.com</span>
+                      <span className="text-sm text-gray-600">info@ogotechnology.net</span>
                     </motion.div>
                     
                     <motion.div 
@@ -253,7 +253,7 @@ const Contact: React.FC = () => {
                   </div>
                   <div className="ml-4">
                     <p className="text-gray-900 font-medium">Email Us</p>
-                    <p className="text-gray-600">ogotechnology.lk@gmail.com</p>
+                    <p className="text-gray-600">info@ogotechnology.net</p>
                   </div>
                 </motion.div>
                 

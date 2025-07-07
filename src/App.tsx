@@ -22,7 +22,7 @@ function App() {
 
   useEffect(() => {
     // Update document title
-    document.title = 'ogo technology - Global Technology Service Provider';
+    document.title = 'ogo technology | AI-Powered Software Development, Web & Mobile Apps, Academic Project Support';
 
     // Simulate loading time and preload assets
     const preloadAssets = async () => {

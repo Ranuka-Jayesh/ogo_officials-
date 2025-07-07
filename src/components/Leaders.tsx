@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Linkedin, Github, Instagram, Facebook, Mail } from 'lucide-react';
+import { Linkedin, Github, Instagram, Facebook, Mail, Clipboard } from 'lucide-react';
 
 // Custom X (formerly Twitter) icon component
 const XIcon = ({ className }: { className?: string }) => (
@@ -49,19 +49,41 @@ const platformStyles = {
     textColor: 'text-[#1877F2]',
     icon: Facebook,
     gradient: 'from-[#1877F2] to-[#166fe5]'
+  },
+  Email: {
+    bgColor: 'bg-purple-600',
+    hoverBg: 'hover:bg-purple-700',
+    textColor: 'text-purple-600',
+    icon: Mail,
+    gradient: 'from-purple-500 to-purple-700'
   }
 };
 
 // Enhanced Confirmation Dialog Component
-const ConfirmDialog = ({ isOpen, onClose, onConfirm, platform, name }: {
+const ConfirmDialog = ({ isOpen, onClose, onConfirm, platform, name, url }: {
   isOpen: boolean;
   onClose: () => void;
   onConfirm: () => void;
   platform: string;
   name: string;
+  url: string;
 }) => {
   const style = platformStyles[platform as keyof typeof platformStyles] || platformStyles.LinkedIn;
   const Icon = style.icon;
+  const [copied, setCopied] = useState(false);
+
+  // Only for email, extract the address
+  const emailAddress = platform === 'Email' ? url.replace('mailto:', '') : '';
+
+  const handleCopy = async () => {
+    if (emailAddress) {
+      try {
+        await navigator.clipboard.writeText(emailAddress);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 1500);
+      } catch (e) {}
+    }
+  };
 
   return (
     <AnimatePresence>
@@ -111,8 +133,23 @@ const ConfirmDialog = ({ isOpen, onClose, onConfirm, platform, name }: {
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.2 }}
               >
-                You're about to visit {name}'s {platform} profile
+                {platform === 'Email'
+                  ? (<span>You're about to email {name}.</span>)
+                  : (<span>You're about to visit {name}'s {platform} profile</span>)}
               </motion.p>
+              {/* Show email address and copy button for Email */}
+              {platform === 'Email' && (
+                <div className="mt-4 flex items-center justify-center gap-2">
+                  <span className="font-mono text-sm select-all text-gray-700">{emailAddress}</span>
+                  <button
+                    onClick={handleCopy}
+                    className="p-1 rounded hover:bg-gray-200 transition-colors"
+                    title={copied ? 'Copied!' : 'Copy to clipboard'}
+                  >
+                    <Clipboard className={`w-4 h-4 ${copied ? 'text-green-500' : 'text-gray-500'}`} />
+                  </button>
+                </div>
+              )}
             </div>
 
             {/* Buttons */}
@@ -124,7 +161,7 @@ const ConfirmDialog = ({ isOpen, onClose, onConfirm, platform, name }: {
                 onClick={onConfirm}
               >
                 <Icon className="w-4 h-4" />
-                <span>Visit Profile</span>
+                <span>{platform === 'Email' ? 'Send Email' : 'Visit Profile'}</span>
               </motion.button>
               <motion.button
                 whileHover={{ scale: 1.02 }}
@@ -170,7 +207,11 @@ const Leaders: React.FC = () => {
   };
 
   const handleConfirm = () => {
-    window.open(dialogState.url, '_blank', 'noopener,noreferrer');
+    if (dialogState.platform === 'Email') {
+      window.location.href = dialogState.url;
+    } else {
+      window.open(dialogState.url, '_blank', 'noopener,noreferrer');
+    }
     setDialogState(prev => ({ ...prev, isOpen: false }));
   };
 
@@ -186,7 +227,7 @@ const Leaders: React.FC = () => {
         github: "https://github.com/Ranuka-Jayesh",
         instagram: "https://www.instagram.com/ranuka_jayesh/",
         facebook: "https://web.facebook.com/people/RJ-Ganegame/100089793589670/?_rdc=1&_rdr",
-        email: "dr.ranukajayesh@gmail.com"
+        email: "rjganegama@ogotechnology.net"
       }
     },
     {
@@ -201,7 +242,7 @@ const Leaders: React.FC = () => {
         github: "https://github.com/Denuwan10",
         instagram: "https://www.instagram.com/v_denuwan_?igsh=aTZ6cDg3OXcyZnA5",
         facebook: "https://www.facebook.com/visal.denuwan.2025?mibextid=ZbWKwL",
-        email: "visalrajapaksha195@gmail.com"
+        email: "denuwan@ogotechnology.net"
       }
     },
     {
@@ -215,7 +256,7 @@ const Leaders: React.FC = () => {
         github: "https://github.com/MPrajakaruna",
         instagram: "https://www.instagram.com/manuu_la/profilecard/?igsh=MXNjNGdkNW81eDBwNA==",
         facebook: "https://www.facebook.com/manula.pulasthi?mibextid=ZbWKwL",
-        email: "mprajakaruna04@gmail.com"
+        email: "mprajakaruna@ogotechnology.net"
       }
     }
   ];
@@ -228,6 +269,7 @@ const Leaders: React.FC = () => {
         onConfirm={handleConfirm}
         platform={dialogState.platform}
         name={dialogState.name}
+        url={dialogState.url}
       />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -357,6 +399,7 @@ const Leaders: React.FC = () => {
                       </motion.a>
                       <motion.a
                         href={`mailto:${leader.social.email}`}
+                        onClick={(e) => handleSocialClick(e, `mailto:${leader.social.email}`, 'Email', leader.name)}
                         className="text-gray-400 hover:text-purple-600 transition-colors"
                         whileHover={{ scale: 1.2 }}
                         whileTap={{ scale: 0.9 }}
